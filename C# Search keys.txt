@@ -1,0 +1,28 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+class EntryPoint
+{
+    static IWebDriver driver = new ChromeDriver("C:\\Users\\Ammar\\Downloads\\chromedriver_win32");
+    static IWebElement textbox;
+
+
+
+     static void Main()
+        {
+        string url = "https://test.fixergeek.com/";
+
+        driver.Navigate().GoToUrl(url);
+
+        textbox = driver.FindElement(By.Name("category"));
+
+        textbox.SendKeys("Virus");
+        textbox.Submit();
+
+        Thread.Sleep(8000);
+
+        driver.Quit(); 
+        }
+
+        
+} 

@@ -1,0 +1,95 @@
+frist create the class Driver.cs
+
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+namespace Testing
+{
+    public static class Driver
+    {
+        public static IWebDriver driver = new ChromeDriver("C:\\Users\\Ammar\\Downloads\\chromedriver_win32");
+    }
+}
+
+then HomePage
+
+using OpenQA.Selenium;
+using SeleniumExtras.PageObjects;
+
+namespace Testing
+{
+    public class HomePage
+    {
+        public HomePage()
+        {
+            PageFactory.InitElements(Driver.driver, this);
+        }
+
+        [FindsBy(How = How.Id, Using = "headerproblems_id")]
+        public IWebElement PROBLEMS { get; set; }
+    }
+}
+
+
+then Menus.cs
+
+
+using OpenQA.Selenium;
+using SeleniumExtras.PageObjects;
+
+namespace Testing
+{
+    public class Menu
+    {
+        static IWebElement textbox;
+        public Menu()
+        {
+            PageFactory.InitElements(Driver.driver, this);
+        }
+
+        [FindsBy(How = How.Id, Using = "headerprofile_id")]
+        public IWebElement SignInButton { get; set; }
+
+        [FindsBy(How = How.Id, Using = "user_name")]
+        public IWebElement GeekName { get; set; }
+
+        [FindsBy(How =How.Id, Using = "password")]
+        public IWebElement Password { get; set; }
+
+        [FindsBy(How = How.Id, Using = "login_btn3")]
+        public IWebElement LoginButton { get; set; }
+
+        [FindsBy(How = How.Id, Using = "loginfrm")]
+        public IWebElement LoginForm { get; set;}
+    }
+}
+
+
+then entry point
+
+using OpenQA.Selenium;
+using Testing;
+
+namespace Testing
+{
+    public class EntryPoint
+    {
+        static IWebElement textbox;
+        static void Main()
+        {
+            Menu menu = new Menu();
+
+            Driver.driver.Navigate().GoToUrl("https://test.fixergeek.com/");
+            menu.SignInButton.Click();
+            menu.GeekName.SendKeys("geek321");
+            menu.Password.SendKeys("123456789");
+            menu.LoginButton.Click();
+           
+
+            
+        }
+
+    }
+}
+
+

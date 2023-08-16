@@ -1,0 +1,56 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+class EntryPoint
+{
+    static void Main()
+    {
+        string url = "https://test.fixergeek.com/";
+        string ID = "category";
+        string className = "img_awesome";
+
+        IWebDriver driver = new ChromeDriver("C:\\Users\\Ammar\\Downloads\\chromedriver_win32");
+
+        driver.Navigate().GoToUrl(url);
+
+        IWebElement element = driver.FindElement(By.Id(ID));
+        IWebElement element1 = driver.FindElement(By.ClassName(className));
+
+        if (element.Displayed)
+        {
+            GreenMessage("Yes, I can see ID string");
+        }
+
+        else
+        { 
+            RedMessage("Nope, It's not there");
+        }
+
+        if (element1.Displayed)
+        {
+            GreenMessage("Yes, I can see the class name variable");
+        }
+
+        else
+        {
+            RedMessage("Nope, It's not there");
+        }
+
+        driver.Quit();
+    } 
+    
+    private static void RedMessage(string message)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(message);
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+
+    private static void GreenMessage(string message)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine(message);
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+}
+  
